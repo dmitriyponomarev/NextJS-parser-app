@@ -38,12 +38,12 @@ const Page = ({ data }) => {
 }
 
 Page.propTypes = {
-    data: PropTypes.shape(
+    data: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.number,
-            title: PropTypes.string,
-            description: PropTypes.string,
-        })
+            id: PropTypes.number.isRequired,
+            title: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
+        }).isRequired
     )
 }
 
