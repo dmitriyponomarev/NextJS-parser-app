@@ -5,9 +5,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:migrate": "hasura migrate apply --database-name postgres --endpoint 'http://localhost:8080'",
+    "db:metadata:apply": "hasura metadata apply --endpoint 'http://localhost:8080'",
+    "db:seed": "hasura seed apply --database-name postgres --endpoint 'http://localhost:8080'",
+    "db:metadata:reload": "hasura metadata reload --endpoint 'http://localhost:8080'",
+    "bootstrap": "npm run docker:build && npm run db:configure",
+    "db:configure": "npm run db:metadata:apply && npm run db:migrate && npm run db:metadata:reload && npm run db:seed",
+    "docker:build": "docker-compose up -d --build"
   },
   "dependencies": {
+    "fs": "0.0.1-security",
+    "graphql": "^16.0.1",
+    "graphql-request": "^3.6.1",
     "next": "12.0.4",
     "react": "17.0.2",
     "react-dom": "17.0.2"
