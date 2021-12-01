@@ -1,5 +1,6 @@
-import { useRouter } from "next/dist/client/router";
-import React, { memo, useEffect, useState } from "react";
+import { useRouter } from 'next/dist/client/router';
+import React, { memo, useEffect, useState } from 'react';
+import { PropTypes } from 'prop-types';
 
 import { client, query } from '../graphql';
 
@@ -11,7 +12,7 @@ const Page = ({ data }) => {
 
     async function getData() {
         try {
-            const response = await client.request(query.getTailsByPK, { tail });
+            const response = await client.request(query.getJSONIdByTail, { tail });
             const currentTail = data.find((item) => item.id === response.long_tails_by_pk.json_id)
             setCurrentObject(currentTail);
         } catch (error) {
@@ -20,8 +21,7 @@ const Page = ({ data }) => {
     };
 
     useEffect(() => {
-        if (!tail) return;
-        getData();
+        if (tail) getData();
     }, []);
 
     return (!currentObject
@@ -37,7 +37,15 @@ const Page = ({ data }) => {
     )
 }
 
-Page.defaultProps = {};
+Page.propTypes = {
+    data: PropTypes.shape(
+        PropTypes.shape({
+            id: PropTypes.number,
+            title: PropTypes.string,
+            description: PropTypes.string,
+        })
+    )
+}
 
 export async function getServerSideProps() {
     try {
