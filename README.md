@@ -10,6 +10,7 @@ After that application parse JSON-file for object with the same id as received f
 
 # Installation
 **Docker is required**
+
 [Docker installation guide]
 
 To configure and run application perform script
@@ -47,6 +48,7 @@ Example of JSON structure:
 
 # Endpoints to use
 There is one usable endpoint: <http://localhost:3000/{tail}>
+
 Where `{tail}` is passed string parameter, for example <http://localhost:3000/best-hello-ever>
 
 Also you can access Hasura console on <http://localhost:8080/console>
